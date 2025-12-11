@@ -1,5 +1,11 @@
 // to access the variable cart outside of the cart.js file
-export let cart =[{
+
+
+export let cart = JSON.parse(localStorage.getItem('cart'));//get cart from local storage and convert it back to js object
+
+//if there is no cart in the local storage , then set cart to an empty array.
+if(!cart){
+  cart =[{
   productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
   quantity:2,
 },
@@ -9,6 +15,13 @@ quantity:1
 }
 
 ];
+};
+
+// create a function to save cart to local storage
+function saveToStorage(){
+  localStorage.setItem('cart',JSON.stringify(cart));
+
+}
 
 // create a function to handle add to cart button 
   export function addToCart(productId){
@@ -29,7 +42,9 @@ quantity:1
           quantity: 1
         });
       }
+      saveToStorage();
   }
+
 
   //remove item from cart 
 
@@ -42,4 +57,5 @@ quantity:1
       }
     });
     cart = newCart;
+    saveToStorage();
   }
