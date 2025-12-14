@@ -155,6 +155,6 @@ console.log(deliveryDate.format('MMMM YYYY D'));
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
-      })
-    })
+      });
+    });
 }
