@@ -1,3 +1,18 @@
+// this function takes a productId as an argument and returns the mathing product object from the products array.
+
+export function getProduct(productId){
+  let matchingProduct;
+
+  products.forEach((product)=>{
+    if(product.id === productId){
+      matchingProduct = product;
+
+    }
+  })
+  return matchingProduct;
+}
+
+
 // data/products.js
 export const products = [
   {

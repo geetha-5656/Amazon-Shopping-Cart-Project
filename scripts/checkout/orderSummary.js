@@ -1,7 +1,7 @@
 import { cart, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products ,getProduct} from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
+import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 // default exported from dayjs library to manage date and time.
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
@@ -17,24 +17,19 @@ console.log(deliveryDate.format('MMMM YYYY D'));
   cart.forEach((cartItem) => {
 
     const productId = cartItem.productId;
-    let matchingProduct;
-    products.forEach((product) => {
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-    });
+
+    let matchingProduct= getProduct(productId);
+
+    
 
     // get the delivery option id from the cart item.
     const deliveryOptionId = cartItem.deliveryOptionId;
 
     // the delivery option selected for the cart item and find the matching delivery option.
-    let deliveryOption;
 
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        deliveryOption = option;
-      }
-    });
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
+
+    
 
     // If no matching delivery option is found, use the first one as default.
     if (!deliveryOption) {
