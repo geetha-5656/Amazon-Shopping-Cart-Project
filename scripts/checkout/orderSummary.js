@@ -5,6 +5,8 @@ import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.j
 // default exported from dayjs library to manage date and time.
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
+import { renderPaymentSummary } from './paymentSummery.js';
+
 
 const today = dayjs();
 const deliveryDate = today.add(7, 'days');
@@ -139,7 +141,10 @@ console.log(deliveryDate.format('MMMM YYYY D'));
         //remove the cart item from the DOM
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         console.log(container);
+
         container.remove();
+
+        renderOrderSummary();
       });
     });
   // add event listener to delivery option radio buttons
@@ -149,6 +154,7 @@ console.log(deliveryDate.format('MMMM YYYY D'));
         const { productId, deliveryOptionId } = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary();
       })
     })
 }
