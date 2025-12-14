@@ -1,6 +1,6 @@
 import {cart,addToCart} from '../data/cart.js';
 import { products }  from '../data/products.js';
-import { formateCurrency }  from './utils/money.js';
+import { formatCurrency }  from './utils/money.js';
 
 //This is used to accumulate (combine) HTML strings for each product during the loop that follows. Starting with an empty string allows you to append HTML content for each product using concatenation (e.g., productsHTML += productHTML;), building a complete HTML block that can later be inserted into the DOM or used elsewhere in the code. Without initializing it, you'd get an undefined reference error on the first append operation.
 let productsHTML = '';
@@ -29,7 +29,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-           ${formateCurrency(product.priceCents)}
+           $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -54,9 +54,8 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart" 
-           
-          data-product-id ="${product.id}">
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+            data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>`;
@@ -88,8 +87,11 @@ document.querySelectorAll('.js-add-to-cart')
       const productId = button.dataset.productId;
       addToCart(productId);
       updateCartQuantity()
-      
+
     });
   });
+
+// Update cart quantity on page load
+updateCartQuantity();
 
 
