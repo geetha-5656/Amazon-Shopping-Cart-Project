@@ -60,3 +60,18 @@ function saveToStorage(){
     cart = newCart;
     saveToStorage();
   }
+
+   export function updateDeliveryOption(productId,deliveryOptionId){
+     let matchingItem;
+      //loop through cart array to check if the product is already in the cart.
+      cart.forEach((cartItem) => {
+        if (productId === cartItem.productId) {
+          matchingItem = cartItem;
+        }
+      });
+      if (matchingItem) {
+        matchingItem.deliveryOptionId = deliveryOptionId;
+        saveToStorage();
+      }
+
+  }
